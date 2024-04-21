@@ -2,6 +2,12 @@ package cz.coffee.requests;
 
 import cz.coffee.accessors.Access;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+
 public class Controller {
     private String urlBank;
     private String client_id;
@@ -35,6 +41,20 @@ public class Controller {
     }
     public Access HEAD(){
         return Access.UNKNOWN;
+    }
+
+    public static String getResponse(String urlToRead) throws Exception {
+        StringBuilder result = new StringBuilder();
+        URI uri = new URI(urlToRead);
+        HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
+        conn.setRequestMethod("GET");
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()))) {
+            for (String line; (line = reader.readLine()) != null; ) {
+                result.append(line);
+            }
+        }
+        return result.toString();
     }
 
     public String httpsStringConstructor(){
