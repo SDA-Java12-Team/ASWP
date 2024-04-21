@@ -12,9 +12,7 @@ public class Main {
         System.out.println("Hello world!");
         // CoffeeRequired...
         // Project Begin
-
-        // Steve25 here
-
+        
         System.out.println(getResponse("https://www.seznam.cz"));
 
     }
