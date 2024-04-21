@@ -1,12 +1,14 @@
 package cz.coffee.controllers;
 
+import java.time.LocalDateTime;
+
 public class TeamsController {
 
     private String subject;
 
-    private int startDateTime;
+    private LocalDateTime startDateTime;
 
-    private int endDateTime;
+    private LocalDateTime endDateTime;
 
     public String getSubject() {
         return subject;
@@ -16,25 +18,25 @@ public class TeamsController {
         this.subject = subject;
     }
 
-    public int getStartDateTime() {
+    public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(int startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
 
-    public int getEndDateTime() {
+    public LocalDateTime getEndDateTime() {
         return endDateTime;
     }
 
-    public void setEndDateTime(int endDateTime) {
+    public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
 
 
 
-    public TeamsController(String subject, int startDateTime, int endDateTime) {
+    public TeamsController(String subject, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         this.subject = subject;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
