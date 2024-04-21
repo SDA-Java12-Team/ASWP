@@ -10,6 +10,12 @@ public class TeamsController {
 
     private LocalDateTime endDateTime;
 
+    public TeamsController(String subject, LocalDateTime startDateTime) {
+        this.subject = subject;
+        this.startDateTime = startDateTime;
+    }
+
+
     public String getSubject() {
         return subject;
     }
@@ -33,16 +39,6 @@ public class TeamsController {
     public void setEndDateTime(LocalDateTime endDateTime) {
         this.endDateTime = endDateTime;
     }
-
-
-
-    public TeamsController(String subject, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        this.subject = subject;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-    }
-
-
 
     public static void createMeeting() {
         System.out.println();
