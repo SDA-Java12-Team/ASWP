@@ -1,6 +1,7 @@
 package cz.coffee.controllers;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class TeamsController {
 
@@ -10,9 +11,9 @@ public class TeamsController {
 
     private LocalDateTime endDateTime;
 
-    public TeamsController(String subject, LocalDateTime startDateTime) {
+    public TeamsController(String subject) {
         this.subject = subject;
-        this.startDateTime = startDateTime;
+        this.startDateTime = LocalDateTime.now();
     }
 
 
@@ -41,7 +42,7 @@ public class TeamsController {
     }
 
     public static void createMeeting() {
-        System.out.println();
+        System.out.println("The meeting is created");
     }
 
     public static void deleteMeeting(){
