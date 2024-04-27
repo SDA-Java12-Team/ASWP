@@ -38,16 +38,36 @@ public class TeamsController {
     public TeamsController(String meetingID) {
         //
         // this class will be called like:
-        // TeamController teamController = new TeamController("ds654sdf456dsf5ds4f6");
+        // TeamsController teamsController = new TeamsController("ds654sdf456dsf5ds4f6");
         //
-        // TODO fill the rest fields from methods below (subject, startDateTime, endDateTime, participants)
-        // TODO make a methods to fill the duration and participantsCount fields
+        // TODO make a methods to fill the duration
             this.meetingID = meetingID;
             this.subject = createSubject();
+            this.participants = createParticipants(10);
+            this.startDateTime = createStartDateTime();
+            this.endDateTime = createEndDateTime();
     }
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
+    public String[] getParticipants() {
+        return this.participants;
+    }
+    public ZonedDateTime getStartDateTime() {
+        return this.startDateTime;
+    }
+
+    public ZonedDateTime getEndDateTime() {
+        return this.endDateTime;
+    }
+
+
+
+
+    public int getParticipantsCount () {
+        return this.participants.length;
+            }
+
 
     private String[] createParticipants(int number) {
 
@@ -103,7 +123,7 @@ public class TeamsController {
         int hours = this.random.nextInt(24);
         int minutes = this.random.nextInt(60);
 
-        return startDateTime.minusHours(hours).minusMinutes(minutes);
+        return this.startDateTime.minusHours(hours).minusMinutes(minutes);
     }
 
     private ZonedDateTime createStartDateTime() {
@@ -123,7 +143,7 @@ public class TeamsController {
         for (int i = 0; i < numberOfWords; i++) {
             String word = "";
             for (int j = 0; j < wordsLength; j++) {
-                char ch = (char) (random.nextInt(26) + 'a');
+                char ch = (char) (this.random.nextInt(26) + 'a');
 
                 if (j == 0) {
                     ch = Character.toUpperCase(ch);
