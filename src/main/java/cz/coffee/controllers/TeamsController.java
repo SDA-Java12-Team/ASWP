@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,8 +32,7 @@ public class TeamsController {
 
     private int participantsCount;
 
-    Random random = new Random();
-
+    private Random random = new Random();
 
 
     public TeamsController(String meetingID) {
@@ -41,18 +41,39 @@ public class TeamsController {
         // TeamsController teamsController = new TeamsController("ds654sdf456dsf5ds4f6");
         //
         // TODO make a methods to fill the duration
-            this.meetingID = meetingID;
-            this.subject = createSubject();
-            this.participants = createParticipants(10);
-            this.startDateTime = createStartDateTime();
-            this.endDateTime = createEndDateTime();
+        this.meetingID = meetingID;
+        this.subject = this.createSubject();
+        this.participants = this.createParticipants(10);
+        this.startDateTime = this.createStartDateTime();
+        this.endDateTime = this.createEndDateTime();
+        this.participantsCount = this.getParticipantsCount();
     }
+
     public String getSubject() {
         return this.subject;
     }
+
     public String[] getParticipants() {
         return this.participants;
     }
+
+    public int getParticipantsCount() {
+        return this.participants.length;
+    }
+
+    public void getDuration() {
+        // TODO finish this method, make a correct return format
+        // I have no idea what format we need here.
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
+        ZonedDateTime now = ZonedDateTime.parse(formatter.format(ZonedDateTime.now()));
+
+        Duration duration = Duration.between(this.startDateTime, now.plusMinutes(50));
+        long s = duration.getSeconds();
+
+        System.out.printf("%d:%02d:%02d", s/3600, (s%3600)/60, (s%60));
+    }
+
     public ZonedDateTime getStartDateTime() {
         return this.startDateTime;
     }
@@ -60,13 +81,6 @@ public class TeamsController {
     public ZonedDateTime getEndDateTime() {
         return this.endDateTime;
     }
-
-
-
-
-    public int getParticipantsCount () {
-        return this.participants.length;
-            }
 
 
     private String[] createParticipants(int number) {
@@ -123,7 +137,7 @@ public class TeamsController {
         int hours = this.random.nextInt(24);
         int minutes = this.random.nextInt(60);
 
-        return this.startDateTime.minusHours(hours).minusMinutes(minutes);
+        return this.startDateTime.plusHours(hours).plusMinutes(minutes);
     }
 
     private ZonedDateTime createStartDateTime() {
@@ -151,9 +165,13 @@ public class TeamsController {
 
                 word = word.concat(String.valueOf(ch));
             }
-            result = result.concat(word + " ");
+            result = result.concat(word);
+
+            if (i != numberOfWords - 1) {
+                result = result.concat(" ");
+            }
         }
 
-        return result.trim();
+        return result;
     }
 }
